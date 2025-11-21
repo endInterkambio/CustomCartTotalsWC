@@ -3,7 +3,7 @@
  * Plugin Name: Custom Cart Totals
  * Description: Reemplaza la tabla de totales del carrito de WooCommerce con un diseño personalizado.
  * Author: Enmanuel
- * Version: 1.0
+ * Version: 1.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -36,7 +36,6 @@ function custom_new_cart_totals() {
 
             <!-- MÉTODOS DE ENVÍO -->
             <div class="custom-row">
-                <span>Envío</span>
                 <span>
                     <?php wc_cart_totals_shipping_html(); ?>
                 </span>
@@ -60,37 +59,12 @@ function custom_new_cart_totals() {
     <?php
 }
 
-add_action( 'wp_enqueue_scripts', function() {
-    wp_add_inline_style( 'woocommerce-general', "
-        .custom-cart-totals-container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-        }
-
-        .custom-cart-summary-box {
-            margin-top: 15px;
-        }
-
-        .custom-row, .custom-total-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .custom-total-row {
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: none;
-            margin-top: 10px;
-        }
-
-        .custom-checkout-btn {
-            margin-top: 20px;
-            text-align: center;
-        }
-    " );
+add_action('wp_enqueue_scripts', function() {
+    wp_enqueue_style(
+        'custom-cart-totals-styles',
+        plugin_dir_url(__FILE__) . 'assets/css/custom-cart-totals.css',
+        array(),
+        '1.0.0'
+    );
 });
 
